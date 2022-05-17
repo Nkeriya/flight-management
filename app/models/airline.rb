@@ -4,6 +4,8 @@ class Airline < ApplicationRecord
   before_save :slugify
 
   def avg_score
+    return 0 unless reviews.present?
+
     reviews.average(:score).round(2).to_f
   end
 
