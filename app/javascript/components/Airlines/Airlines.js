@@ -18,11 +18,7 @@ export default function Airlines() {
   }, [airlines.length]);
 
   const list = airlines.map((item) => {
-    return (
-      <div className="col-md-3">
-        <Airline key={item.attributes.name} attributes={item.attributes} />
-      </div>
-    );
+    return <Airline key={item.attributes.name} attributes={item.attributes} />;
   });
   return (
     <div className="container text-center" style={{ marginTop: "80px" }}>
