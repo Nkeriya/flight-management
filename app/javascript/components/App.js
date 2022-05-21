@@ -12,7 +12,7 @@ export default function App() {
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Airlines />} />
-          <Route exact path="/airline/:slug" element={<Airline />} />
+          <Route exact path="/airlines/:slug" element={<Airline />} />
         </Routes>
       </BrowserRouter>
     </>
