@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header";
 import ReviewForm from "./ReviewForm";
+import Review from "./Review";
 
 export default function Airline(props) {
   const [airline, setAirline] = useState({});
@@ -38,7 +39,7 @@ export default function Airline(props) {
     axios
       .post("/api/v1/reviews", { review, airline_id })
       .then((resp) => {
-        const included = [...airline.included, resp.data];
+        const included = [...airline.included, resp.data.data];
         setAirline({ ...airline, included });
         setReview({ title: "", description: "", score: 0 });
 
@@ -57,20 +58,53 @@ export default function Airline(props) {
     setReview({ ...review, score });
   };
 
+  const deleteHandler = (e) => {
+    let review_id = e.target.id;
+
+    axios
+      .delete(`/api/v1/reviews/${review_id}`)
+      .then((resp) => {
+        const included = airline.included.filter((o) => {
+          return o.id !== review_id;
+        });
+        setAirline({ data: airline.data, included: included });
+      })
+      .catch((resp) => {
+        console.log(resp);
+      });
+  };
+
+  let reviews;
+  if (loaded && airline.included) {
+    reviews = airline.included.map((item, index) => {
+      return (
+        <Review
+          key={index}
+          attributes={item.attributes}
+          id={item.id}
+          deleteHandler={deleteHandler}
+        />
+      );
+    });
+  }
+
   return (
-    <div style={{ paddingTop: '50px'}}>
+    <div style={{ paddingTop: "50px" }}>
       <div className="row">
         {loaded && (
           <Fragment>
-            <div className="col-md-7" style={{padding: '0px 150px'}}>
+            <div className="col-md-7" style={{ padding: "0px 150px" }}>
               <Header
                 attributes={airline.data.attributes}
                 reviews={airline.included}
               />
 
-              <div style={{marginTop: '30px'}}><h5>reviews</h5></div>
+              <div style={{ marginTop: "30px" }}>{reviews}</div>
             </div>
-            <div className="col-md-5" style={{backgroundColor: '#6c757db8', padding: '0px 150px'}}>
+            <div
+              className="col-md-5"
+              style={{ backgroundColor: "#6c757db8", padding: "0px 150px", minHeight: '94vh'}}
+            >
               <ReviewForm
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}

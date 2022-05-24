@@ -7,7 +7,7 @@ export default function ReviewForm(props) {
       <form onSubmit={props.handleSubmit}>
         <div>
           <h3>
-            Have an experience with {props.review.name}? share your review{" "}
+            Have an experience with {props.attributes.name}? share your review{" "}
           </h3>
         </div>
         <div>
