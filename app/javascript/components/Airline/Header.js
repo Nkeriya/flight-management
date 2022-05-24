@@ -5,10 +5,10 @@ export default function Header(props) {
   const total = props.reviews.length;
   return (
     <div className="container text-left">
-      <h1>
-        <img src={logo_url} />
-        {name}
-      </h1>
+      <div style={{ width: "200px", height: "200px" }}>
+        <img src={logo_url} style={{ height: "100%", width: "100%" }} />
+      </div>
+      <h1>{name}</h1>
       <div>
         <div>{total} User reviews</div>
         <div>star rating</div>

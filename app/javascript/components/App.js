@@ -7,7 +7,7 @@ import Navbar from "./Navbar";
 
 export default function App() {
   return (
-    <>
+    <div style={{overflowX: 'hidden'}}>
       <BrowserRouter>
         <Navbar />
         <Routes>
@@ -15,6 +15,6 @@ export default function App() {
           <Route exact path="/airlines/:slug" element={<Airline />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
