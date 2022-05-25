@@ -1,6 +1,6 @@
 class Airline < ApplicationRecord
-  has_many :reviews
-  has_one_attached :logo
+  has_many :reviews, dependent: :destroy
+  has_one_attached :logo, dependent: :destroy
 
   before_save :slugify
 

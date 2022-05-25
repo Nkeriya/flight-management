@@ -89,33 +89,35 @@ export default function Airline(props) {
   }
 
   return (
-    <div style={{ paddingTop: "50px" }}>
-      <div className="row">
-        {loaded && (
-          <Fragment>
-            <div className="col-md-7" style={{ padding: "0px 150px" }}>
-              <Header
-                attributes={airline.data.attributes}
-                reviews={airline.included}
-              />
+    <div className="row">
+      {loaded && (
+        <Fragment>
+          <div className="col-md-7" style={{ padding: "0px 150px" }}>
+            <Header
+              attributes={airline.data.attributes}
+              reviews={airline.included}
+            />
 
-              <div style={{ marginTop: "30px" }}>{reviews}</div>
-            </div>
-            <div
-              className="col-md-5"
-              style={{ backgroundColor: "#6c757db8", padding: "0px 150px", minHeight: '94vh'}}
-            >
-              <ReviewForm
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                setRating={setRating}
-                attributes={airline.data.attributes}
-                review={review}
-              />
-            </div>
-          </Fragment>
-        )}
-      </div>
+            <div style={{ marginTop: "30px" }}>{reviews}</div>
+          </div>
+          <div
+            className="col-md-5"
+            style={{
+              backgroundColor: "#6c757db8",
+              padding: "0px 150px",
+              minHeight: "94vh",
+            }}
+          >
+            <ReviewForm
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              setRating={setRating}
+              attributes={airline.data.attributes}
+              review={review}
+            />
+          </div>
+        </Fragment>
+      )}
     </div>
   );
 }

@@ -21,7 +21,7 @@ export default function Airlines() {
     return <Airline key={item.attributes.name} attributes={item.attributes} />;
   });
   return (
-    <div className="container text-center" style={{ marginTop: "80px" }}>
+    <div className="container text-center">
       <div>
         <h1>Flight Management</h1>
       </div>

@@ -3,7 +3,7 @@ import ReactStars from "react-rating-stars-component";
 
 export default function ReviewForm(props) {
   return (
-    <div className="container text-center" style={{ marginTop: "50px" }}>
+    <div className="container text-center">
       <form onSubmit={props.handleSubmit}>
         <div>
           <h3>
@@ -49,7 +49,11 @@ export default function ReviewForm(props) {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn btn-outline-dark" style={{width: '100%', margin: '15px 0px'}}>
+        <button
+          type="submit"
+          className="btn btn-outline-dark"
+          style={{ width: "100%", margin: "15px 0px" }}
+        >
           Submit your review
         </button>
       </form>

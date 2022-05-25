@@ -2,7 +2,7 @@ class Api::V1::AirlinesController < ApplicationController
   protect_from_forgery with: :null_session
 
   def index
-    airlines = Airline.includes(:reviews).all
+    airlines = Airline.includes(:reviews, logo_attachment: :blob).all # .with_attached_logo
 
     render json: AirlineSerializer.new(airlines, options).serializable_hash.to_json
   end
@@ -14,7 +14,8 @@ class Api::V1::AirlinesController < ApplicationController
   end
 
   def create
-    airline = Airline.new(airline_params)
+    airline = Airline.new(airline_params.except(:image))
+    attached_image(airline, params[:airline][:image])
 
     if airline.save
       render json: AirlineSerializer.new(airline).serializable_hash.to_json
@@ -46,10 +47,21 @@ class Api::V1::AirlinesController < ApplicationController
   private
 
   def airline_params
-    params.require(:airline).permit(:name, :image_url)
+    params.require(:airline).permit(:name, :image)
   end
 
   def options
     @options ||= { include: %i[reviews] }
+  end
+
+  def attached_image(airline, image)
+    return unless params[:airline][:image].split(',')[0].include?('base64')
+
+    decoded_data = Base64.decode64(image.split(',')[1])
+    airline.logo = {
+      io: StringIO.new(decoded_data),
+      content_type: 'image/jpeg',
+      filename: "#{airline&.name.parameterize}_logo.jpg"
+    }
   end
 end
