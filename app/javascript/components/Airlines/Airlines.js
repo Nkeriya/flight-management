@@ -28,7 +28,7 @@ export default function Airlines() {
       <div>
         <h4>Airline reviews</h4>
       </div>
-      <div className="row my-5">{list}</div>
+      <div className="row my-5" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{list}</div>
     </div>
   );
 }
