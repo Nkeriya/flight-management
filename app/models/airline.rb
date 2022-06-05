@@ -2,6 +2,8 @@ class Airline < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_one_attached :logo, dependent: :destroy
 
+  validates :slug, uniqueness: true
+
   before_save :slugify
 
   def avg_score

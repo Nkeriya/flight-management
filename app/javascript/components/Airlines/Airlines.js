@@ -5,21 +5,48 @@ import Airline from "./Airline";
 export default function Airlines() {
   const [airlines, setAirlines] = useState([]);
 
-  useEffect(() => {
-    // Get all of our airline from api
-    // update airlines in our state
-
+  const test_function = ()=> {
     axios
       .get("/api/v1/airlines.json")
       .then((resp) => {
         setAirlines(resp.data.data);
       })
       .catch((resp) => console.log(resp));
+  }
+
+  useEffect(() => {
+    // Get all of our airline from api
+    // update airlines in our state
+    test_function();
+
   }, [airlines.length]);
 
-  const list = airlines.map((item) => {
-    return <Airline key={item.attributes.name} attributes={item.attributes} />;
+  const deleteHandler = (e) => {
+    let airline_slug = e.target.dataset.slug;
+    debugger
+    axios
+      .delete(`/api/v1/airlines/${e.target.dataset.slug}`)
+      .then((resp) => {
+        if (resp.status == 204) {
+          test_function();
+        }
+      })
+      .catch((resp) => {
+        console.log('log');
+      });
+  };
+
+  let list = airlines.map((item, index) => {
+    return (
+      <Airline
+        key={index}
+        attributes={item.attributes}
+        id={item.id}
+        deleteHandler={deleteHandler}
+      />
+    );
   });
+
   return (
     <div className="container text-center">
       <div>
@@ -28,7 +55,16 @@ export default function Airlines() {
       <div>
         <h4>Airline reviews</h4>
       </div>
-      <div className="row my-5" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>{list}</div>
+      <div
+        className="row my-5"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {list}
+      </div>
     </div>
   );
 }

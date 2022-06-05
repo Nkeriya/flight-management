@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { ImagePicker } from "react-file-picker";
-import "font-awesome/css/font-awesome.min.css";
 
 export default function New() {
   const [airline, setAirline] = useState({
@@ -30,6 +29,9 @@ export default function New() {
       .post("/api/v1/airlines", { airline })
       .then((resp) => {
         setAirline({ name: "", image: "" });
+        if (resp.status == 200){
+          window.location = "/"
+        }
       })
       .catch((resp) => {
         console.log(resp);
