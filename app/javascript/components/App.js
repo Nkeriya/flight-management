@@ -2,7 +2,11 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Airline from "./Airline/Airline";
 import Airlines from "./Airlines/Airlines";
+import 'jquery';
+import '@popperjs/core';
+import 'bootstrap/dist/js/bootstrap.bundle';
 import "bootstrap/dist/css/bootstrap.min.css";
+import "font-awesome/css/font-awesome.min.css";
 import Navbar from "./Navbar";
 import NewAirline from "./Airlines/New";
 
