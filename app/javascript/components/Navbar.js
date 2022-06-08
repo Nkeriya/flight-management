@@ -26,6 +26,11 @@ export default function Navbar() {
                 New Airline
               </Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/airlines/edit">
+                Edit Airline
+              </Link>
+            </li>
           </ul>
           <form className="d-flex">
             <input
