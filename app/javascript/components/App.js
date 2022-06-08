@@ -15,7 +15,7 @@ export default function App() {
     <div style={{ overflowX: "hidden" }}>
       <BrowserRouter>
         <Navbar />
-        <div style={{ marginTop: "80px" }}>
+        <div style={{ marginTop: "55px" }}>
           <Routes>
             <Route exact path="/" element={<Airlines />} />
             <Route exact path="/airlines/:slug" element={<Airline />} />

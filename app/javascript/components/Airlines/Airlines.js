@@ -5,7 +5,7 @@ import Airline from "./Airline";
 export default function Airlines() {
   const [airlines, setAirlines] = useState([]);
 
-  const test_function = ()=> {
+  const reset_airline = ()=> {
     axios
       .get("/api/v1/airlines.json")
       .then((resp) => {
@@ -17,18 +17,19 @@ export default function Airlines() {
   useEffect(() => {
     // Get all of our airline from api
     // update airlines in our state
-    test_function();
+    reset_airline();
 
   }, [airlines.length]);
 
   const deleteHandler = (e) => {
     let airline_slug = e.target.dataset.slug;
-    debugger
+    // debugger
     axios
       .delete(`/api/v1/airlines/${e.target.dataset.slug}`)
       .then((resp) => {
         if (resp.status == 204) {
-          test_function();
+          // debugger
+          reset_airline();
         }
       })
       .catch((resp) => {
@@ -48,7 +49,7 @@ export default function Airlines() {
   });
 
   return (
-    <div className="container text-center">
+    <div className="container text-center" style={{marginTop: '100px'}}>
       <div>
         <h1>Flight Management</h1>
       </div>

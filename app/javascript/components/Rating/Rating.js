@@ -1,6 +1,5 @@
 import React from "react";
 // import './Rating.css'
-import "font-awesome/css/font-awesome.min.css";
 
 export default function Rating(props) {
   // const score = (props.score?props.score/5:1) * 100

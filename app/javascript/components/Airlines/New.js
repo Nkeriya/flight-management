@@ -29,8 +29,8 @@ export default function New() {
       .post("/api/v1/airlines", { airline })
       .then((resp) => {
         setAirline({ name: "", image: "" });
-        if (resp.status == 200){
-          window.location = "/"
+        if (resp.status == 200) {
+          window.location = "/";
         }
       })
       .catch((resp) => {
@@ -39,53 +39,55 @@ export default function New() {
   };
 
   return (
-    <form className="container g-3" onSubmit={handleSubmit}>
-      <div className="row mb-4">
-        <div className="col-auto">
-          <label htmlFor="airline-name" className="col-form-label">
-            Airline name:{" "}
-          </label>
+    <div style={{marginTop: '100px'}}>
+      <form className="container g-3" onSubmit={handleSubmit}>
+        <div className="row mb-4">
+          <div className="col-auto">
+            <label htmlFor="airline-name" className="col-form-label">
+              Airline name:{" "}
+            </label>
+          </div>
+          <div className="col-auto">
+            <input
+              type="text"
+              id="airline-name"
+              name="name"
+              onChange={nameChangeHandler}
+              className="form-control"
+              aria-describedby="passwordHelpInline"
+            />
+          </div>
         </div>
-        <div className="col-auto">
-          <input
-            type="text"
-            id="airline-name"
-            name="name"
-            onChange={nameChangeHandler}
-            className="form-control"
-            aria-describedby="passwordHelpInline"
-          />
+        <div className="row mb-4">
+          <div className="col-auto">
+            <ImagePicker
+              extensions={["jpg", "jpeg", "png"]}
+              dims={{
+                minWidth: 100,
+                maxWidth: "100%",
+                minHeight: 100,
+                maxHeight: "100%",
+              }}
+              onChange={(base64) => imageChangeHandler(base64)}
+              onError={(errMsg) => console.log(errMsg)}
+            >
+              <button type="button" className="btn">
+                <i className="fa fa-3x fa-upload" aria-hidden="true"></i>
+              </button>
+            </ImagePicker>
+          </div>
+          <div className="col-auto">
+            <label htmlFor="airline-image" className="col-form-label">
+              Upload Airline Image
+            </label>
+          </div>
         </div>
-      </div>
-      <div className="row mb-4">
-        <div className="col-auto">
-          <ImagePicker
-            extensions={["jpg", "jpeg", "png"]}
-            dims={{
-              minWidth: 100,
-              maxWidth: "100%",
-              minHeight: 100,
-              maxHeight: "100%",
-            }}
-            onChange={(base64) => imageChangeHandler(base64)}
-            onError={(errMsg) => console.log(errMsg)}
-          >
-            <button type="button" className="btn">
-              <i className="fa fa-3x fa-upload" aria-hidden="true"></i>
-            </button>
-          </ImagePicker>
-        </div>
-        <div className="col-auto">
-          <label htmlFor="airline-image" className="col-form-label">
-            Upload Airline Image
-          </label>
-        </div>
-      </div>
 
-      <button type="submit" className="btn btn-outline-dark">
-        Submit
-      </button>
-    </form>
+        <button type="submit" className="btn btn-outline-dark">
+          Submit
+        </button>
+      </form>
+    </div>
   );
 }
 
